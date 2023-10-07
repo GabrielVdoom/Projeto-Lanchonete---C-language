@@ -140,9 +140,10 @@ void login()
     }
 
     printf("\nACESSO GRANTED!\n\n");
-    printf("Press any key to acess the Virtual Cafeteria...\n\n");
+    printf("Press any key to acess the Virtual Cafeteria...");
     getch();
     menulanchonete();
+    return;
 }
 
 

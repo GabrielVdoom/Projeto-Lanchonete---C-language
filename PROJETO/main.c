@@ -141,7 +141,7 @@ void login()
 
 
         printf("\nACESSO GARANTIDO!\n\n");
-        printf("Pressione qualquer tecla para acessar a LANCHONETE...\n\n");
+        printf("Pressione qualquer tecla para acessar a LANCHONETE...");
         getch();
         menulanchonete();
 
