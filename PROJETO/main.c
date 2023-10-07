@@ -78,7 +78,7 @@ void cadastrar()
     totalUsuarios++;
 
     printf("\nMuito Bem! Usuário e senha cadastrados com sucesso!\n\n");
-    printf("Pressione uma tecla para voltar ao menu:\n\n");
+    printf("Pressione uma tecla para voltar ao menu...");
     getch();
     system("cls");
     menu();
@@ -114,33 +114,37 @@ void login()
     printf("\nDigite a senha:\n\n");
     scanf("%s", senha1);
 
-    while(strcmp(senha[indexUsuario], senha1)!=0)
-
-        {   attempts++;
-            if(attempts==1)
+        while (strcmp(senha[indexUsuario], senha1) != 0)
+        {
+            attempts++;
+            if (attempts == 1)
             {
-            printf("\nACESSO NEGADO, TENTE NOVAMENTE, 3 tentativas restantes:\n\n");
-            scanf("%s", senha1);
+                printf("\nACESSO NEGADO, TENTE NOVAMENTE, 3 tentativas restantes:\n\n");
+                scanf("%s", senha1);
             }
-            if(attempts==2)
+            else if (attempts == 2)
             {
-            printf("\nACESSO NEGADO, TENTE NOVAMENTE, 2 tentativas restantes:\n\n");
-            scanf("%s", senha1);
+                printf("\nACESSO NEGADO, TENTE NOVAMENTE, 2 tentativas restantes:\n\n");
+                scanf("%s", senha1);
             }
-            if(attempts==3)
+            else if (attempts == 3)
             {
-            printf("\nACESSO NEGADO, TENTE NOVAMENTE, 1 tentativa restantes:\n\n");
-            scanf("%s", senha1);
+                printf("\nACESSO NEGADO, TENTE NOVAMENTE, 1 tentativa restante:\n\n");
+                scanf("%s", senha1);
             }
-            if(attempts==4)
+            else if (attempts == 4)
+            {
                 printf("\nACESSO BLOQUEADO\n\n");
+                return 0;
+            }
+        }
 
-    }
 
-    printf("\nACESSO GARANTIDO!\n\n");
-    printf("Pressione qualquer tecla para acessar a LANCHONETE...\n\n");
-    getch();
-    menulanchonete();
+        printf("\nACESSO GARANTIDO!\n\n");
+        printf("Pressione qualquer tecla para acessar a LANCHONETE...\n\n");
+        getch();
+        menulanchonete();
+
 
 }
 

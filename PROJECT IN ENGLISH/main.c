@@ -77,7 +77,7 @@ void cadastrar()
     totalUsers++;
 
     printf("\nWell Done! User and password successfully registered\n");
-    printf("\nPress any key to return to menu...\n\n");
+    printf("\nPress any key to return to menu...");
     getch();
     system("cls");
     menu();
@@ -132,7 +132,10 @@ void login()
             scanf("%s", password1);
             }
             if(attempts==4)
-                printf("\nACESS BLOCKED\n\n");
+            {
+            printf("\nACESS BLOCKED\n\n");
+            return 0;
+            }
 
     }
 
