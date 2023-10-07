@@ -5,7 +5,7 @@
 
 
 char user[100][10], password[100][20], user1[10], password1[20], productChoice[100][20], Adress[4][30], number[100];
-int attempts=0, totalusers=0, paymentChoice, unidadeCoffee=0, unidadeCheeseBread=0, unidadePizza=0, unidadeFries=0, unidadeHamburguer=0, unidadeSoda=0, unidadeJuice=0;
+int attempts=0, totalUsers=0, paymentChoice, unidadeCoffee=0, unidadeCheeseBread=0, unidadePizza=0, unidadeFries=0, unidadeHamburguer=0, unidadeSoda=0, unidadeJuice=0;
 float precoTotal=0, valordotroco, vtroco;
 
 
@@ -42,32 +42,42 @@ void menu()
 }
 
 void cadastrar()
-{
-    printf("\nEnter a username to create your login:\n\n");
-    scanf(" %[^\n]", user[totalusers]);
-
-    while (strchr(user[totalusers], ' ') != NULL)
+{int loop=0;
+    while (loop==0)
     {
-        printf("\nUsername can't contain spacebar, type in again:\n\n");
-        scanf(" %[^\n]", user[totalusers]);
-    }
+        printf("\nEnter a username to create your login (spacebar not allowed):\n\n");
+        scanf(" %[^\n]", user[totalUsers]);
 
-     for(int i=0; i<totalusers; i++)
-               while(strcmp(user[totalusers], user[i])==0)
+        if (strchr(user[totalUsers], ' ') != NULL)
+        {
+            printf("\nUsername can't contain spacebar...\n\n");
+        }
+        else
+        {
+            int duplicate = 0;
+
+            for (int i = 0; i < totalUsers; i++)
+            {
+                if (strcmp(user[totalUsers], user[i]) == 0)
                 {
-                printf("\nUsername already registred, type a new username or type 3 to go back to menu:\n\n");
-                scanf("%s", user[totalusers]);
-                if(strcmp(user[totalusers], "3")==0)
-                {   system("cls");
-                    menu();
+                    printf("\nUsername already registered...\n\n");
+                    duplicate = 1;
+                    break;
                 }
-                }
+            }
+
+            if (duplicate==0)
+            {
+                break;
+            }
+        }
+    }
     printf("\nEnter a password:\n\n");
-    scanf("%s", password[totalusers]);
-    totalusers++;
+    scanf("%s", password[totalUsers]);
+    totalUsers++;
 
     printf("\nWell Done! User and password successfully registered\n");
-    printf("\nPress any key to return to menu\n\n");
+    printf("\nPress any key to return to menu...\n\n");
     getch();
     system("cls");
     menu();
@@ -81,7 +91,7 @@ void login()
     int achou=0;
     int indexuser;
     while (achou==0) {
-        for (int i = 0; i < totalusers; i++) {
+        for (int i = 0; i < totalUsers; i++) {
             if (strcmp(user1,user[i])==0) {
                 achou = 1;
                 indexuser = i;
@@ -146,7 +156,7 @@ void menulanchonete()
     printf(" 6.Soda------------$3,50\n");
     printf(" 7.Juice-----------$3,00\n\n");
 
-    printf("Type in your order, one by one, then press 0 to end your order and proceed to checkout:\n\n");
+    printf("Type in your order, one by one, type 0 to end your order and proceed to checkout or type 'back' to go back to main menu:\n\n");
 
     for(int i=1; i<=100000;i++)
     {fflush(stdin);
@@ -183,6 +193,11 @@ void menulanchonete()
            {precoTotal+=3;
            unidadeJuice++;
            }
+        else if(stricmp(productChoice,"back")==0)
+        {
+            system("cls");
+            menu();
+        }
         else
         {
         printf("\nItem not registered, try again\n\n");
@@ -261,7 +276,7 @@ void carrinho()
              scanf("%d", &troco);
              if(troco==1)
              {
-             printf("\nTroco para quanto?\n");
+             printf("\nHow much do you have?($)\n");
               scanf("%f", &vtroco);
               while(vtroco<precoTotal)
               {
@@ -269,7 +284,7 @@ void carrinho()
                   scanf("%f", &vtroco);
               }
               valordotroco=vtroco-precoTotal;
-              printf("\nTroco: $%.2f\n", valordotroco);
+              printf("\nChange: $%.2f\n", valordotroco);
               PedirEndereco();
               return;
              }

@@ -43,39 +43,45 @@ void menu()
 }
 
 void cadastrar()
-{
-    printf("\nDigite um nome de usuário para criar seu Login (sem espaços):\n\n");
-    scanf(" %[^\n]", usuario[totalUsuarios]);
-
-    while (strchr(usuario[totalUsuarios], ' ') != NULL)
+{int loop=0;
+    while (loop==0)
     {
-        printf("\nNome do usuário não pode conter espaços. Digite outro usuário:\n\n");
+        printf("\nDigite um nome de usuário para criar seu Login (sem espaços):\n\n");
         scanf(" %[^\n]", usuario[totalUsuarios]);
+
+        if (strchr(usuario[totalUsuarios], ' ') != NULL)
+        {
+            printf("\nNome do usuário não pode conter espaços...\n\n");
+        }
+        else
+        {
+            int duplicate = 0;
+
+            for (int i = 0; i < totalUsuarios; i++)
+            {
+                if (strcmp(usuario[totalUsuarios], usuario[i]) == 0)
+                {
+                    printf("\nUsuário já cadastrado...\n\n");
+                    duplicate = 1;
+                    break;
+                }
+            }
+
+            if (duplicate==0)
+            {
+                break;
+            }
+        }
     }
-
-
-    for(int i=0; i<totalUsuarios; i++)
-              {
-              while(strcmp(usuario[totalUsuarios], usuario[i])==0)
-                {printf("\nUsuário já cadastrado, digite outro usuário ou digite 3 para voltar ao menu:\n\n");
-                scanf("%s", usuario[totalUsuarios]);
-                if(strcmp(usuario[totalUsuarios], "3")==0)
-                {   system("cls");
-                    menu();
-                    return;
-                }
-                }
-              }
     printf("\nAgora digite uma senha:\n\n");
     scanf("%s", senha[totalUsuarios]);
     totalUsuarios++;
 
     printf("\nMuito Bem! Usuário e senha cadastrados com sucesso!\n\n");
-    printf("Pressione um tecla para voltar ao menu:\n\n");
+    printf("Pressione uma tecla para voltar ao menu:\n\n");
     getch();
     system("cls");
     menu();
-
 }
 
 void login()
@@ -152,7 +158,7 @@ void menulanchonete()
     printf(" 6.Refrigerante----R$3,50\n");
     printf(" 7.Suco------------R$3,00\n\n");
 
-    printf("Digite o seu pedido, item por item (máx 20 itens), pressione 0 para encerrar o seu pedido e ir para a forma de Pagamento:\n\n");
+    printf("Digite o seu pedido, item por item (máx 20 itens), digite 0 para encerrar o seu pedido e ir para a forma de Pagamento, digite 'voltar' para voltar para o menu principal:\n\n");
 
     for(int i=1; i<=100;i++)
     {
@@ -190,6 +196,11 @@ void menulanchonete()
            {precoTotal+=3;
            unidadeSuco++;
            }
+        else if (stricmp(escolhaProdutos,"voltar")==0)
+        {
+          system("cls");
+          menu();
+        }
         else
         {
         printf("\nItem não cadastrado, digite novamente:\n\n");
